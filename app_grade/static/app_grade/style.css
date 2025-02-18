@@ -113,9 +113,10 @@ body {
 }
 
 .line {
+    
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 20px;
     height: 2px;
     background-color: #007bff; /* Change this color to match the desired effect */
     transition: width 0.3s ease, left 0.3s ease;
@@ -174,8 +175,8 @@ min-height: 20vh; /* ทำให้ container สูงเต็มหน้า
 .tab_box .line{
     position: absolute;
     top: 65px;
-    left: 35px;
-    width: 90px;
+    left: 30px;
+    width: 30px;
     height: 5px;
     background-color: #7360ff;
     border-radius: 10px;
@@ -311,18 +312,8 @@ min-height: 20vh; /* ทำให้ container สูงเต็มหน้า
     0% { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
  }
-<<<<<<< HEAD
-.line{
- position: absolute;
- top: 0;
- left: 0;
- width: 90px;
- height: 5px;
- background-color: #7360ff;
-}
-=======
 
->>>>>>> 5eb1ca51aed75a1d6765f56af9c255b8834570c6
+
 
  
  
