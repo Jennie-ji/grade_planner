@@ -28,4 +28,20 @@ function toggleMusic() {
     }
 }
 
+const tabButtons = document.querySelectorAll('.tab_btn');
+const line = document.querySelector('.line');
+let activeIndex = 0;
+
+tabButtons.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+        document.querySelector('.tab_btn.active').classList.remove('active');
+        btn.classList.add('active');
+        line.style.left = `calc(20% * ${index})`;
+        activeIndex = index;
+    });
+});
+
+// Initialize line position
+line.style.left = `calc(20% * ${activeIndex})`;
+
 
