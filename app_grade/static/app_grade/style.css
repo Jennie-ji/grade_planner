@@ -170,7 +170,7 @@ body {
 }
 
 .contact-section .contact-info {
-    flex: 0 0 45%; 
+    flex: 0 0 20%; 
     margin: 0.5rem;
     box-sizing: border-box;
     text-align: center; 
