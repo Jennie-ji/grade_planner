@@ -114,7 +114,7 @@ body {
 }
 
 .container_box{
-    padding 20 px;
+    padding :20 px;
 }
 
 .content_box .content {
