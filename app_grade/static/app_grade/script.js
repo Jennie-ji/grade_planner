@@ -17,13 +17,27 @@ document.querySelectorAll('.content-section').forEach(section => {
 });
 
 let audio = document.getElementById('bgMusic');
+audio.autoplay = false;
 
-function toggleMusic() {
-    if (audio.paused) {
-        audio.play();
-        document.querySelector('.music-icon').textContent = '🔊';
-    } else {
-        audio.pause();
-        document.querySelector('.music-icon').textContent = '🔈';
+    window.addEventListener('load', function() {
+        let isPlaying = localStorage.getItem('isPlaying');
+        if (isPlaying === 'true') {
+            audio.play();
+            document.querySelector('.music-icon').textContent = '🔊';
+        } else {
+            audio.pause();
+            document.querySelector('.music-icon').textContent = '🔈';
+        }
+    });
+
+    function toggleMusic() {
+        if (audio.paused) {
+            audio.play();
+            document.querySelector('.music-icon').textContent = '🔊';
+            localStorage.setItem('isPlaying', 'true');
+        } else {
+            audio.pause();
+            document.querySelector('.music-icon').textContent = '🔈';
+            localStorage.setItem('isPlaying', 'false');
+        }
     }
-}
