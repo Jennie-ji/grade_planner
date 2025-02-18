@@ -124,7 +124,7 @@
           </div>
         </div>
 
-        <div class="details">
+      <div class="details">
           <h1>Detail tips</h1>
         
         <div class="details_container">
@@ -140,7 +140,7 @@
           <div class="content_box">
               <div class="content active">
             <p>
-              การเทียบโอนหน่วยกิต คือ กระบวนการที่นักศึกษาใช้ในการ
+              <br>การเทียบโอนหน่วยกิต คือ กระบวนการที่นักศึกษาใช้ในการ
               โอนหน่วยกิตจากรายวิชาที่เคยเรียนมาแล้วในสถาบันการศึกษาหนึ่ง 
               ไปยังอีกสถาบันการศึกษาหนึ่ง หรือหลักสูตรอื่นของสถาบันเดิม
               เพื่อนำหน่วยกิตเหล่านั้นไปใช้ในการศึกษาต่อ 
@@ -180,7 +180,8 @@
 
             
             <h3><br>สถานะการติดภาคทัณฑ์การพ้นจากการติดภาคทัณฑ์</h3>
-            <p>การติดภาคทัณฑ์ ก็ต่อเมื่อมี GPA ของภาคการศึกษาปัจจุบัน อยู่ระหว่าง 1.00 และ 2.00 
+            <p>
+              การติดภาคทัณฑ์ ก็ต่อเมื่อมี GPA ของภาคการศึกษาปัจจุบัน อยู่ระหว่าง 1.00 และ 2.00 
                <br> - การติดภาคทัณฑ์สามารถพ้นได้หากภาคการศึกษาถัดไป มี GPS มากกว่า 2.00 และ ในภาคการศึกษาเดียวกันนั้น มี GPA มากกว่า 2.00
                <br> - ยังคงสถานะเดิม ก็ต่อเมื่อ ภาคการศึกษาถัดไป มี GPS มากกว่า 2.00  แต่  ภาคการศึกษาเดียวกันนั้น มี GPA น้อย 2.00
                <br> - ถูกย้ายสถานะเป็น พ้นสภาพการเป็นนักศึกษา หาก GPS ภาคการศึกษาถัดไป มี GPS น้อยกว่า 2.00
@@ -196,17 +197,25 @@
                     <dev class="content ">
                       <h2>Home2</h2>
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed eveniet minus 
+                        <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed eveniet minus 
                         quod neque maiores obcaecati sint unde, minima officia dolorem ipsum quam adipisci 
                         repellat sit enim blanditiis alias nesciunt cum.
                       </p>
-                    </dev>
-    
-                  
+                    </dev>  
+
+                    <div class="content_box">
+                      <dev class="content ">
+                        <h2>Home2</h2>
+                        <p>
+                          <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed eveniet minus 
+                          quod neque maiores obcaecati sint unde, minima officia dolorem ipsum quam adipisci 
+                          repellat sit enim blanditiis alias nesciunt cum.
+                        </p>
+                      </dev>  
+           </div>
           </div>
+        </div>
       </div>
-    </div>
-  </div>
       </section>
 
       
@@ -257,17 +266,20 @@
       const tabs = document.querySelectorAll('.tab_btn');
       const all_content= document.querySelectorAll('.content');
 
-      tabs.forEach((tab, index)=>{
-         tab.addEventListener('click', ()=>{
+      tabs.forEach(
+        (tab, index)=>
+        {
+         tab.addEventListener
+         ('click', ()=>
+          {
             tabs.forEach(tab=>{tab.classList.remove('active')});
             tab.classList.add('active');
-          
-          all_content.forEach(content=>{content.classList.remove('active')});
-          all_content[index].classList.add('active');
-          
-          
-          })
-      })
+            
+            all_content.forEach(content=>{content.classList.remove('active')});
+            all_content[index].classList.add('active');
+            }
+          )
+        })
   </script>
   
 

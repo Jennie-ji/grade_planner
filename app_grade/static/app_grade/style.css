@@ -89,7 +89,8 @@ body {
     background-color: #ffffff;
     padding: 30px;
     box-shadow: 0 2px 16px rgba(0,0,0,.1);
-    border-radius: 20 px ;
+    border-radius: 20px ;
+    
 }
 .tab_box{
     width: 100%;
@@ -114,7 +115,7 @@ body {
 }
 
 .container_box{
-    padding 20 px;
+    padding: 20 px;
 }
 
 .content_box .content {
@@ -154,8 +155,20 @@ flex-direction: column; /* จัดเรียงเนื้อหาแน�
 justify-content: center; /* จัดตำแหน่งแนวนอนตรงกลาง */
 align-items: center; /* จัดตำแหน่งแนวตั้งตรงกลาง (ถ้าต้องการ) */
 min-height: 20vh; /* ทำให้ container สูงเต็มหน้าจอ (ถ้าต้องการ) */
+
 }
 
+
+.tab_box .line{
+    position: absolute;
+    top: 65px;
+    left: 35px;
+    width: 90px;
+    height: 5px;
+    background-color: #7360ff;
+    border-radius: 10px;
+    transition: all .3s ease-in-out;
+}
 
 
 
@@ -287,14 +300,12 @@ min-height: 20vh; /* ทำให้ container สูงเต็มหน้า
     100% { background-position: 100% 50%; }
  }
 .line{
-    
  position: absolute;
  top: 0;
  left: 0;
  width: 90px;
  height: 5px;
  background-color: #7360ff;
-
 }
 
  
