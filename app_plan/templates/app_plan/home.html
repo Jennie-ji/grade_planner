@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grade Calculator</title>
+    <link rel="stylesheet" href="{% static 'app_plan/style.css' %}" />
+  </head>
+  <body>
+    <div class="card">
+      <div class="card-title">เครื่องมือวางแผนคำนวณเกรด</div>
+      <form id="grade-form">
+        <!-- ฟอร์มกรอกข้อมูล -->
+        <div class="form-group">
+          <label
+            >จำนวนหน่วยกิตที่เรียนมาแล้ว (ไม่นับวิชา S/U/T)
+            <span style="color: red">*</span></label
+          >
+          <input
+            type="number"
+            name="current_credits"
+            placeholder="เช่น 60"
+            min="0"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>เกรดเฉลี่ยปัจจุบัน <span style="color: red">*</span></label>
+          <input
+            type="number"
+            name="current_gpa"
+            placeholder="เช่น 3.50"
+            step="0.01"
+            min="0"
+            max="4"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>เกรดเฉลี่ยที่ต้องการ <span style="color: red">*</span></label>
+          <input
+            type="number"
+            name="target_gpa"
+            placeholder="เช่น 3.75"
+            step="0.01"
+            min="0"
+            max="4"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>จำนวนวิชา 1 หน่วยกิตที่เหลือ</label>
+          <input
+            type="number"
+            name="courses_1_credit"
+            placeholder="0"
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label>จำนวนวิชา 2 หน่วยกิตที่เหลือ</label>
+          <input
+            type="number"
+            name="courses_2_credits"
+            placeholder="0"
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label>จำนวนวิชา 3 หน่วยกิตที่เหลือ</label>
+          <input
+            type="number"
+            name="courses_3_credits"
+            placeholder="0"
+            min="0"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>จำนวนวิชา 4 หน่วยกิตที่เหลือ</label>
+          <input
+            type="number"
+            name="courses_4_credits"
+            placeholder="0"
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label>จำนวนวิชา 5 หน่วยกิตที่เหลือ</label>
+          <input
+            type="number"
+            name="courses_5_credits"
+            placeholder="0"
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label>จำนวนวิชา 6 หน่วยกิตที่เหลือ</label>
+          <input
+            type="number"
+            name="courses_6_credits"
+            placeholder="0"
+            min="0"
+          />
+        </div>
+        <button type="button" class="btn" onclick="validateAndCalculate()">
+          คำนวณ
+        </button>
+      </form>
+      <div id="result" class="result" style="display: none">
+        <p id="result-text"></p>
+        <div id="plans"></div>
+      </div>
+    </div>
+
+    <script>
+      function validateAndCalculate() {
+        const form = document.getElementById("grade-form");
+        const inputs = form.querySelectorAll("[required]");
+        let valid = true;
+
+        // ตรวจสอบข้อมูลในฟอร์ม
+        inputs.forEach((input) => {
+          if (!input.value) {
+            input.style.border = "1px solid red";
+            valid = false;
+          } else {
+            input.style.border = "";
+          }
+        });
+
+        if (!valid) {
+          alert("กรุณากรอกข้อมูลในช่องที่มีเครื่องหมาย *");
+          return;
+        }
+
+        const formData = new FormData(form);
+        fetch("{% url 'grade_calculator' %}", {
+          method: "POST",
+          headers: { "X-CSRFToken": "{{ csrf_token }}" },
+          body: formData,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            const resultDiv = document.getElementById("result");
+            resultDiv.style.display = "block";
+            document.getElementById("result-text").innerHTML = data.result;
+
+            const plansDiv = document.getElementById("plans");
+            plansDiv.innerHTML = ""; // เคลียร์ข้อมูลเก่า
+
+            // แสดงแผนการกระจายเกรด
+            data.distributions.forEach((distribution, index) => {
+              let section = `<h4>แนวทางที่ ${index + 1} (เกรดเฉลี่ย ${
+                distribution.avgGrade || "N/A"
+              }):</h4>`;
+
+              [6, 5, 4, 3, 2, 1].forEach((credit) => {
+                if (
+                  distribution[credit] &&
+                  Object.values(distribution[credit]).some((count) => count > 0)
+                ) {
+                  let creditSection = `<p>วิชา ${credit} หน่วยกิต:</p><ul>`;
+                  Object.entries(distribution[credit]).forEach(
+                    ([grade, count]) => {
+                      if (count > 0) {
+                        creditSection += `<li>เกรด ${grade}: ${count} วิชา</li>`;
+                      }
+                    }
+                  );
+                  creditSection += `</ul>`;
+                  section += creditSection;
+                }
+              });
+
+              plansDiv.innerHTML += section;
+            });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("เกิดข้อผิดพลาด: ไม่สามารถคำนวณได้");
+          });
+      }
+    </script>
+  </body>
+</html>
