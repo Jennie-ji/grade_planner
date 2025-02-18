@@ -311,6 +311,7 @@ min-height: 20vh; /* ทำให้ container สูงเต็มหน้า
     0% { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
  }
+<<<<<<< HEAD
 .line{
  position: absolute;
  top: 0;
@@ -319,6 +320,9 @@ min-height: 20vh; /* ทำให้ container สูงเต็มหน้า
  height: 5px;
  background-color: #7360ff;
 }
+=======
+
+>>>>>>> 5eb1ca51aed75a1d6765f56af9c255b8834570c6
 
  
  
