@@ -298,16 +298,7 @@ min-height: 20vh; /* ทำให้ container สูงเต็มหน้า
     0% { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
  }
-.line{
-    
- position: absolute;
- top: 0;
- left: 0;
- width: 90px;
- height: 5px;
- background-color: #7360ff;
 
-}
 
  
  
