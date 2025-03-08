@@ -1,11 +1,6 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   font-family: Arial, sans-serif;
+  padding-top: 80px;
 }
 /*.card {
   max-width: 600px;
@@ -91,12 +86,18 @@ body {
 }
 
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
   background-color: #f6f1c5;
   width: 100%;
+  z-index: 1000;
+  box-sizing: border-box;
 }
 
 .logo-container {
