@@ -1,3 +1,5 @@
+ใช้ render ในการ deploy  
+
 ![สกรีนช็อต 2025-02-11 130817](https://github.com/user-attachments/assets/25ee7eb0-c616-4636-af9c-eed5890a03a4)
 
 ---------------------------------
