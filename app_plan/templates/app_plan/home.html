@@ -129,6 +129,51 @@
           คำนวณ
         </button>
       </form>
+      <form id="export-pdf-form" method="post" action="{% url 'export_pdf' %}">
+        {% csrf_token %}
+        <input type="hidden" name="current_credits" id="pdf_current_credits" />
+        <input type="hidden" name="current_gpa" id="pdf_current_gpa" />
+        <input type="hidden" name="target_gpa" id="pdf_target_gpa" />
+        <input
+          type="hidden"
+          name="courses_1_credit"
+          id="pdf_courses_1_credit"
+        />
+        <input
+          type="hidden"
+          name="courses_2_credits"
+          id="pdf_courses_2_credits"
+        />
+        <input
+          type="hidden"
+          name="courses_3_credits"
+          id="pdf_courses_3_credits"
+        />
+        <input
+          type="hidden"
+          name="courses_4_credits"
+          id="pdf_courses_4_credits"
+        />
+        <input
+          type="hidden"
+          name="courses_5_credits"
+          id="pdf_courses_5_credits"
+        />
+        <input
+          type="hidden"
+          name="courses_6_credits"
+          id="pdf_courses_6_credits"
+        />
+        <button
+          id="export-btn"
+          type="button"
+          class="btn"
+          onclick="submitPDFForm()"
+          style="display: none"
+        >
+          Export PDF
+        </button>
+      </form>
       <div id="result" class="result" style="display: none">
         <p id="result-text"></p>
         <div id="plans"></div>
@@ -136,6 +181,34 @@
     </div>
 
     <script>
+      function submitPDFForm() {
+        document.getElementById("pdf_current_credits").value =
+          document.querySelector("[name='current_credits']").value;
+        document.getElementById("pdf_current_gpa").value =
+          document.querySelector("[name='current_gpa']").value;
+        document.getElementById("pdf_target_gpa").value =
+          document.querySelector("[name='target_gpa']").value;
+        document.getElementById("pdf_courses_1_credit").value =
+          document.querySelector("[name='courses_1_credit']").value;
+        document.getElementById("pdf_courses_2_credits").value =
+          document.querySelector("[name='courses_2_credits']").value;
+        document.getElementById("pdf_courses_3_credits").value =
+          document.querySelector("[name='courses_3_credits']").value;
+        document.getElementById("pdf_courses_4_credits").value =
+          document.querySelector("[name='courses_4_credits']").value;
+        document.getElementById("pdf_courses_5_credits").value =
+          document.querySelector("[name='courses_5_credits']").value;
+        document.getElementById("pdf_courses_6_credits").value =
+          document.querySelector("[name='courses_6_credits']").value;
+
+        // ✅ ตรวจสอบว่ามีแผนก่อนส่งข้อมูลไป Export
+        if (document.getElementById("export-btn").style.display !== "none") {
+          document.getElementById("export-pdf-form").submit();
+        } else {
+          alert("ยังไม่มีแผนการคำนวณ กรุณากดคำนวณก่อน");
+        }
+      }
+
       function toggleDarkMode() {
         document.body.classList.toggle("dark-mode");
 
@@ -187,38 +260,49 @@
           })
           .then((data) => {
             const resultDiv = document.getElementById("result");
+            const exportBtn = document.getElementById("export-btn");
             resultDiv.style.display = "block";
             document.getElementById("result-text").innerHTML = data.result;
 
             const plansDiv = document.getElementById("plans");
             plansDiv.innerHTML = ""; // เคลียร์ข้อมูลเก่า
 
-            // แสดงแผนการกระจายเกรด
-            data.distributions.forEach((distribution, index) => {
-              let section = `<h4>แนวทางที่ ${index + 1} (เกรดเฉลี่ย ${
-                distribution.avgGrade || "N/A"
-              }):</h4>`;
+            if (data.distributions && data.distributions.length > 0) {
+              data.distributions.forEach((distribution, index) => {
+                let section = `<h4>แนวทางที่ ${index + 1} (เกรดเฉลี่ย ${
+                  distribution.avgGrade || "N/A"
+                }):</h4>`;
 
-              [6, 5, 4, 3, 2, 1].forEach((credit) => {
-                if (
-                  distribution[credit] &&
-                  Object.values(distribution[credit]).some((count) => count > 0)
-                ) {
-                  let creditSection = `<p>วิชา ${credit} หน่วยกิต:</p><ul>`;
-                  Object.entries(distribution[credit]).forEach(
-                    ([grade, count]) => {
-                      if (count > 0) {
-                        creditSection += `<li>เกรด ${grade}: ${count} วิชา</li>`;
+                [6, 5, 4, 3, 2, 1].forEach((credit) => {
+                  if (
+                    distribution[credit] &&
+                    Object.values(distribution[credit]).some(
+                      (count) => count > 0
+                    )
+                  ) {
+                    let creditSection = `<p>วิชา ${credit} หน่วยกิต:</p><ul>`;
+                    Object.entries(distribution[credit]).forEach(
+                      ([grade, count]) => {
+                        if (count > 0) {
+                          creditSection += `<li>เกรด ${grade}: ${count} วิชา</li>`;
+                        }
                       }
-                    }
-                  );
-                  creditSection += `</ul>`;
-                  section += creditSection;
-                }
+                    );
+                    creditSection += `</ul>`;
+                    section += creditSection;
+                  }
+                });
+
+                section += `<hr class="plan-divider">`;
+                plansDiv.innerHTML += section;
               });
-              section += `<hr class="plan-divider">`;
-              plansDiv.innerHTML += section;
-            });
+
+              // ✅ แสดงปุ่ม Export PDF ถ้ามีแผน
+              exportBtn.style.display = "block";
+            } else {
+              // ❌ ซ่อนปุ่ม Export PDF ถ้าไม่มีแผน
+              exportBtn.style.display = "none";
+            }
           })
           .catch((error) => {
             console.error("Error:", error); // แสดงข้อผิดพลาดใน Console เท่านั้น

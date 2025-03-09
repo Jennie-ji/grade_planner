@@ -40,7 +40,7 @@ body.dark-mode {
 .dark-mode .logo-text {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #f6f1c5;
+  color: white;
 }
 
 .dark-mode .card {
@@ -162,6 +162,7 @@ textarea {
   color: white;
   font-size: 16px;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .btn:hover {
