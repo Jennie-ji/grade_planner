@@ -24,6 +24,11 @@
         Home
       </button>
     </header>
+    <div class="dark-mode-container">
+      <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+        🌙 Dark Mode
+      </button>
+    </div>
     <div class="card">
       <div class="card-title">เครื่องมือวางแผนคำนวณเกรด</div>
       <form id="grade-form">
@@ -131,6 +136,23 @@
     </div>
 
     <script>
+      function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+
+        // บันทึกสถานะ Dark Mode ไว้ใน Local Storage
+        if (document.body.classList.contains("dark-mode")) {
+          localStorage.setItem("darkMode", "enabled");
+        } else {
+          localStorage.setItem("darkMode", "disabled");
+        }
+      }
+
+      // เช็คว่าผู้ใช้เปิด Dark Mode ไว้หรือไม่เมื่อโหลดหน้าเว็บ
+      window.onload = function () {
+        if (localStorage.getItem("darkMode") === "enabled") {
+          document.body.classList.add("dark-mode");
+        }
+      };
       function validateAndCalculate() {
         const form = document.getElementById("grade-form");
         const inputs = form.querySelectorAll("[required]");
@@ -146,10 +168,10 @@
           }
         });
 
-        if (!valid) {
+        /*if (!valid) {
           alert("กรุณากรอกข้อมูลในช่องที่มีเครื่องหมาย *");
           return;
-        }
+        }*/
 
         const formData = new FormData(form);
         fetch("{% url 'grade_calculator' %}", {
@@ -194,7 +216,7 @@
                   section += creditSection;
                 }
               });
-
+              section += `<hr class="plan-divider">`;
               plansDiv.innerHTML += section;
             });
           })
