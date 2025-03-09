@@ -51,4 +51,11 @@ def calculate_distributions(courses, required_grade, remaining_credits):
 
 
     recursive_calculate({}, 0, 0)
-    return distributions[:10]  # จำกัดไม่เกิน 10 แผน
+    def sort_criteria(plan):
+        return (
+            plan["avgGrade"],  # เรียงตามค่าเฉลี่ยน้อยไปมาก
+            sum(plan[credit]["A"] for credit in plan if credit != "avgGrade")  # เรียงตาม A น้อยสุดมาก่อน
+        )
+
+    return sorted(distributions, key=sort_criteria)[:10]
+ # จำกัดไม่เกิน 10 แผน
