@@ -17,6 +17,7 @@ document.querySelectorAll('.content-section').forEach(section => {
 });
 
 let audio = document.getElementById('bgMusic');
+<<<<<<< HEAD
 
 function toggleMusic() {
     if (audio.paused) {
@@ -45,3 +46,29 @@ tabButtons.forEach((btn, index) => {
 line.style.left = `calc(20% * ${activeIndex})`;
 
 
+=======
+audio.autoplay = false;
+
+    window.addEventListener('load', function() {
+        let isPlaying = localStorage.getItem('isPlaying');
+        if (isPlaying === 'true') {
+            audio.play();
+            document.querySelector('.music-icon').textContent = '🔊';
+        } else {
+            audio.pause();
+            document.querySelector('.music-icon').textContent = '🔈';
+        }
+    });
+
+    function toggleMusic() {
+        if (audio.paused) {
+            audio.play();
+            document.querySelector('.music-icon').textContent = '🔊';
+            localStorage.setItem('isPlaying', 'true');
+        } else {
+            audio.pause();
+            document.querySelector('.music-icon').textContent = '🔈';
+            localStorage.setItem('isPlaying', 'false');
+        }
+    }
+>>>>>>> 9c3f7592d7063574d22b40c478e3643e45492956

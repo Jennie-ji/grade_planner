@@ -26,7 +26,7 @@
       </button>
     </header>
 
-    <audio autoplay loop id="bgMusic">
+    <audio loop id="bgMusic">
       <source
         src="{% static 'app_grade/music/background.mp3' %}"
         type="audio/mp3"
@@ -51,13 +51,12 @@
 
         <div class="section-content">
           <img
-            src="{% static 'app_grade/image/logo.jpg' %}"
+            src="{% static 'app_grade\image\unofficial_transcript Copy.jpg' %}"
             class="section-image"
             alt="Feature 1"
           />
-          <div class="section-text">
-            <h2 class="section-heading">Feature One</h2>
-            <p class="section-description">
+        </div>
+        <div class = "section-description">
               การวัดผลการศึกษาเป็นกระบวนการที่สำคัญในการประเมินและวิเคราะห์ผลการเรียนรู้ของนักเรียน 
               ซึ่งโดยทั่วไปแล้วมักจะใช้ระบบคะแนนตัวเลข (grading system) เพื่อสะท้อนถึงระดับความรู้และความสามารถของนักเรียน 
               อย่างไรก็ตาม ยังมีระบบการวัดผลที่ไม่ได้ใช้คะแนนตัวเลขเช่นกัน ได้แก่ระบบ S, U และ T<br>
@@ -66,10 +65,9 @@
               T (Transfer) หมายถึง นักเรียนที่ได้รับการเทียบโอนหน่วยกิตจากสถาบันอื่น ๆ โดยไม่มีการให้คะแนนในรายวิชานั้น ๆ<br>
               การไม่นำผลการเรียนในระบบ S, U และ T มาคิดค่าเฉลี่ย เน้นให้เห็นถึงความสำคัญในการเรียนรู้และพัฒนาตนเอง โดยไม่เน้นการวัดระดับความสามารถเชิงปริมาณ 
               สิ่งนี้ช่วยลดความกดดันและความตึงเครียด ทำให้นักเรียนสามารถเรียนรู้และเติบโตได้อย่างมีประสิทธิภาพ 
-              อีกทั้งยังเปิดโอกาสให้นักเรียนได้เรียนรู้จากความผิดพลาดและปรับปรุงตนเองโดยไม่ต้องกังวลเรื่องคะแนนเฉลี่ย นอกจากนี้ การประเมินผลแบบ S, U และ T 
+              อีกทั้งยังเปิดโอกาสให้นักเรียนได้เรียนรู้จากความผิดพลาดและปรับปรุงตนเองโดยไม่ต้องกังวลเรื่องคะแนนเฉลี่ย<br> 
+              นอกจากนี้ การประเมินผลแบบ S, U และ T 
               ยังเป็นการประเมินที่ยุติธรรมและเท่าเทียมกัน ทำให้นักเรียนทุกคนได้รับการประเมินผลในรูปแบบเดียวกัน ไม่ขึ้นอยู่กับคะแนนตัวเลขที่อาจแตกต่างกันไป
-            </p>
-          </div>
         </div>
 
         <div class="section-content">
@@ -79,7 +77,7 @@
             alt="Feature 2"
           />
           <div class="section-text">
-            <h2 class="section-heading">Feature Two</h2>
+            <h2 class="section-heading">GPS เเละ GPA</h2>
             <p class="section-description">
               ค่าระดับคะแนนเฉลี่ยประจำภาคการศึกษา (Grade Point Average of Semester: GPS) คือ
               การคำนวณค่าระดับคะแนนเฉลี่ยจากรายวิชาที่นักศึกษาเรียนหรือเทียบโอนในภาคการศึกษานั้นๆ เท่านั้น 
@@ -101,7 +99,7 @@
             alt="Feature 3"
           />
           <div class="section-text">
-            <h2 class="section-heading">Feature Three</h2>
+            <h2 class="section-heading">การให้ปริญญาเกียรตินิยม</h2>
             <p class="section-description">
               การให้ปริญญาเกียรตินิยม แบ่งเป็นดังนี้<br>
               เกียรตินิยมอันดับหนึ่งเหรียญทอง ต้องเป็นผู้ได้รับค่าระดับคะแนนเฉลี่ย
@@ -123,87 +121,7 @@
             </p>
           </div>
         </div>
-
-        <div class="details">
-          <h1>Detail tips</h1>
-        <div class="details_container">
-        <div class="container">
-          <div class="tab_box">
-            <button class="tab_btn active">การเทียบโอนหน่วยกิต</button>
-            <button class="tab_btn">เกรด</button>
-            <button class="tab_btn">สถาภาพการศึกษา</button>
-            <button class="tab_btn">Home 1</button>
-            <button class="tab_btn">Home 2</button>
-            <div class="line"></div>
-        </div>
-        <div class="content_box">
-          <div class="content active">
-            <p>
-              การเทียบโอนหน่วยกิต คือ กระบวนการที่นักศึกษาใช้ในการ
-              โอนหน่วยกิตจากรายวิชาที่เคยเรียนมาแล้วในสถาบันการศึกษาหนึ่ง 
-              ไปยังอีกสถาบันการศึกษาหนึ่ง หรือหลักสูตรอื่นของสถาบันเดิม
-              เพื่อนำหน่วยกิตเหล่านั้นไปใช้ในการศึกษาต่อ 
-              โดยไม่ต้องเรียนซ้ำในรายวิชาที่มีเนื้อหาเดียวกันอีก
-            </p>
-          </div>
-    
-          <div class="content_box">
-            <dev class="content">
-                <p>
-                    <br>A: ดีเยี่ยม (Excellent)
-                    <br>B+: ดีมาก (Very Good)
-                    <br>B: ดี (Good)
-                    <br>C+: ค่อนข้างดี (Fairly Good)
-                    <br>C: พอใช้ (Fair)
-                    <br>D+: ค่อนข้างอ่อน (Rather Poor)
-                    <br>D: อ่อน (Poor)
-                    <br>F: ตก (Failed)
-                    <br> เกรด F หมายถึงสอบตกหรือสอบไม่ผ่านในวิชานั้น ๆ ซึ่งนักศึกษาจะต้องลงทะเบียนเรียนวิชานั้นใหม่ในภาคเรียนถัดไป 
-                    หรือถ้าเป็นวิชาเลือกก็สามารถเลือกลงทะเบียนเรียนวิชาอื่นแทนได้ 
-                </p>
-            </dev>
-    
-                <div class="content_box">
-                  <dev class="content ">
-                    <h3><br>การติดภาคทัณคืออะไร ?</h3>
-            <p>
-              การติดภาคทัณฑ์ คือการที่นักเรียน นักศึกษา หรือผู้เรียน ได้รับโทษทางวินัย ซึ่งมีผลกระทบต่อผลการเรียน หรือสถานะทางการศึกษา โดยสามารถแบ่งได้เป็น 3 สถานะ ได้แก่
-              ไม่ติดภาคทัณฑ์ การพ้นจากการติดภาคทัณฑ์ พ้นสภาพการเป็นนักศึกษา
-            </p>
-            
-            <h3><br>สถานะไม่ติดภาคทัณฑ์</h3>
-            <p>มี GPA มากกว่า 2.00</p>
-
-            
-            <h3><br>สถานะการติดภาคทัณฑ์การพ้นจากการติดภาคทัณฑ์</h3>
-            <p>การติดภาคทัณฑ์ ก็ต่อเมื่อมี GPA ของภาคการศึกษาปัจจุบัน อยู่ระหว่าง 1.00 และ 2.00 
-               <br> - การติดภาคทัณฑ์สามารถพ้นได้หากภาคการศึกษาถัดไป มี GPS มากกว่า 2.00 และ ในภาคการศึกษาเดียวกันนั้น มี GPA มากกว่า 2.00
-               <br> - ยังคงสถานะเดิม ก็ต่อเมื่อ ภาคการศึกษาถัดไป มี GPS มากกว่า 2.00  แต่  ภาคการศึกษาเดียวกันนั้น มี GPA น้อย 2.00
-               <br> - ถูกย้ายสถานะเป็น พ้นสภาพการเป็นนักศึกษา หาก GPS ภาคการศึกษาถัดไป มี GPS น้อยกว่า 2.00
-            </p>
-            <h3><br>สถานะพ้นสภาพการเป็นนักศึกษา</h3>  
-            <p>ภาคการศึกษาถัดไป GPA น้อยกว่า 1.00</p>  
-        </dev>
-
-                  <div class="content_box">
-                <dev class="content ">
-                      <h2>Home2</h2>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed eveniet minus 
-                        quod neque maiores obcaecati sint unde, minima officia dolorem ipsum quam adipisci 
-                        repellat sit enim blanditiis alias nesciunt cum.
-                      </p>
-        </dev>   
-          </div>
-      </div>
-    </div>
-  </div>
       </section>
-
-      
-      <!--- details addition-->
-      
-
 
       <section class="cta-section content-section">
         <h2 class="section-title">Ready to Get Started?</h2>
@@ -241,26 +159,6 @@
         </div>
       </section>
     </main>
-    <script src="{% static 'app_grade/script.js' %}">
-
-    </script>
-    <script>
-      const tabs = document.querySelectorAll('.tab_btn');
-      const all_content= document.querySelectorAll('.content');
-
-      tabs.forEach((tab, index)=>{
-         tab.addEventListener('click', ()=>{
-            tabs.forEach(tab=>{tab.classList.remove('active')});
-            tab.classList.add('active');
-          
-          all_content.forEach(content=>{content.classList.remove('active')});
-          all_content[index].classList.add('active');
-          
-          
-          })
-      })
-  </script>
-  
-
+    <script src="{% static 'app_grade/script.js' %}"></script>
   </body>
 </html>

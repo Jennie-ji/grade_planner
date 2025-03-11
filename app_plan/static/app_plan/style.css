@@ -1,6 +1,17 @@
+<<<<<<< HEAD
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
+=======
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+>>>>>>> 9c3f7592d7063574d22b40c478e3643e45492956
 }
 /*.card {
   max-width: 600px;
@@ -84,3 +95,47 @@ body {
   border-radius: 4px;
   background-color: #e9ecef;
 }
+<<<<<<< HEAD
+=======
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f6f1c5;
+  width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+}
+
+.logo-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.try-it-btn {
+  padding: 0.5rem 1.5rem;
+  background-color: #5c3085;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.try-it-btn:hover {
+  background-color: #0056b3;
+}
+>>>>>>> 9c3f7592d7063574d22b40c478e3643e45492956
