@@ -128,6 +128,9 @@
         <button type="button" class="btn" onclick="validateAndCalculate()">
           คำนวณ
         </button>
+        <button type="button" class="btn" onclick="calculateMaxGPA()">
+          ดู GPA สูงสุด
+        </button>
       </form>
       <form id="export-pdf-form" method="post" action="{% url 'export_pdf' %}">
         {% csrf_token %}
@@ -306,6 +309,88 @@
           })
           .catch((error) => {
             console.error("Error:", error); // แสดงข้อผิดพลาดใน Console เท่านั้น
+          });
+      }
+      function calculateMaxGPA() {
+        const form = document.getElementById("grade-form");
+        const inputs = form.querySelectorAll("[required]");
+        let valid = true;
+
+        // ตรวจสอบว่าช่องที่ต้องกรอกครบหรือยัง
+        inputs.forEach((input) => {
+          if (!input.value) {
+            input.style.border = "1px solid red";
+            valid = false;
+          } else {
+            input.style.border = "";
+          }
+        });
+
+        // ❗ ถ้ากรอกไม่ครบ ให้แสดงใน #result แทน alert
+        const resultDiv = document.getElementById("result");
+        const resultText = document.getElementById("result-text");
+        const plansDiv = document.getElementById("plans");
+        const exportBtn = document.getElementById("export-btn");
+
+        if (!valid) {
+          resultDiv.style.display = "block";
+          resultText.innerText = "กรุณากรอกข้อมูลหน่วยกิตที่เหลือให้ถูกต้อง";
+          plansDiv.innerHTML = "";
+          exportBtn.style.display = "none";
+          return;
+        }
+
+        // ✅ ถ้ากรอกครบแล้ว ดำเนินการคำนวณตามปกติ
+        const formData = new FormData(form);
+
+        fetch("{% url 'max_gpa' %}", {
+          method: "POST",
+          headers: { "X-CSRFToken": "{{ csrf_token }}" },
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            resultDiv.style.display = "block";
+            resultText.innerHTML = data.result;
+            plansDiv.innerHTML = "";
+
+            if (data.distributions && data.distributions.length > 0) {
+              data.distributions.forEach((distribution, index) => {
+                let section = `<h4>แผน GPA สูงสุด (เกรดเฉลี่ย ${
+                  distribution.avgGrade || "N/A"
+                }):</h4>`;
+
+                [6, 5, 4, 3, 2, 1].forEach((credit) => {
+                  if (
+                    distribution[credit] &&
+                    Object.values(distribution[credit]).some(
+                      (count) => count > 0
+                    )
+                  ) {
+                    let creditSection = `<p>วิชา ${credit} หน่วยกิต:</p><ul>`;
+                    Object.entries(distribution[credit]).forEach(
+                      ([grade, count]) => {
+                        if (count > 0) {
+                          creditSection += `<li>เกรด ${grade}: ${count} วิชา</li>`;
+                        }
+                      }
+                    );
+                    creditSection += `</ul>`;
+                    section += creditSection;
+                  }
+                });
+
+                section += `<hr class="plan-divider">`;
+                plansDiv.innerHTML += section;
+              });
+
+              exportBtn.style.display = "block";
+            } else {
+              exportBtn.style.display = "none";
+            }
+          })
+          .catch((error) => {
+            console.error("เกิดข้อผิดพลาด:", error);
           });
       }
     </script>

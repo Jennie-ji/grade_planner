@@ -37,7 +37,7 @@ def calculate_distributions(courses, required_grade, remaining_credits):
                                 new_plan[credit] = {
                                     "A": iA, "B+": iBp, "B": iB,
                                     "C+": iCp, "C": iC, "D+": iDp,
-                                    "D": iD  # ❌ ไม่มี F แล้ว
+                                    "D": iD 
                                 }
                                 total_score_for_credit = (
                                     grade_values["A"] * iA +

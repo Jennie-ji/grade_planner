@@ -187,3 +187,43 @@ def export_pdf(request):
         return response
 
     return JsonResponse({"error": "Method not allowed"}, status=405)
+
+#from django.views.decorators.csrf import ensure_csrf_cookie
+
+def max_gpa_view(request):
+    if request.method == "POST":
+        try:
+            current_credits = float(request.POST.get("current_credits", 0) or 0)
+            current_gpa = float(request.POST.get("current_gpa", 0) or 0)
+            courses_1 = int(request.POST.get("courses_1_credit", 0) or 0)
+            courses_2 = int(request.POST.get("courses_2_credits", 0) or 0)
+            courses_3 = int(request.POST.get("courses_3_credits", 0) or 0)
+            courses_4 = int(request.POST.get("courses_4_credits", 0) or 0)
+            courses_5 = int(request.POST.get("courses_5_credits", 0) or 0)
+            courses_6 = int(request.POST.get("courses_6_credits", 0) or 0)
+
+            remaining_credits = (
+                courses_1 + courses_2 * 2 + courses_3 * 3 + courses_4 * 4 +
+                courses_5 * 5 + courses_6 * 6
+            )
+
+            if remaining_credits == 0:
+                return JsonResponse({"result": "กรุณากรอกข้อมูลหน่วยกิตที่เหลือให้ถูกต้อง"})
+
+            total_credits = current_credits + remaining_credits
+            max_total_score = current_gpa * current_credits + 4.0 * remaining_credits
+            max_gpa = max_total_score / total_credits
+
+            result = f"หากคุณได้เกรด A ในทุกวิชาที่เหลือ ({remaining_credits} หน่วยกิต), GPA สูงสุดที่เป็นไปได้คือ {max_gpa:.2f}"
+
+            plan = {"avgGrade": 4.0}
+            for credit, count in [(1, courses_1), (2, courses_2), (3, courses_3),
+                                  (4, courses_4), (5, courses_5), (6, courses_6)]:
+                if count > 0:
+                    plan[credit] = {"A": count}
+
+            return JsonResponse({"result": result, "distributions": [plan]})
+        except Exception as e:
+            return JsonResponse({"result": "เกิดข้อผิดพลาดในการคำนวณ", "error": str(e)})
+
+    return JsonResponse({"error": "Method not allowed"}, status=405)
