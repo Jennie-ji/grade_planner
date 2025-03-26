@@ -1,7 +1,7 @@
 grade_values = {
     "A": 4, "B+": 3.5, "B": 3,
     "C+": 2.5, "C": 2, "D+": 1.5,
-    "D": 1  # ❌ ไม่มี F แล้ว
+    "D": 1  
 }
 
 def calculate_distributions(courses, required_grade, remaining_credits):
