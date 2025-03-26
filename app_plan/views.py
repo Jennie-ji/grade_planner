@@ -63,7 +63,16 @@ def grade_calculator(request):
         
 
         # ส่งผลลัพธ์กลับ
-        result = f"คุณต้องทำเกรดเฉลี่ยอย่างน้อย {required_grade:.2f} ในวิชาที่เหลือ ({remaining_credits} หน่วยกิต) เพื่อให้ได้ GPA {target_gpa:.2f} หรือมากกว่า"
+        if distributions:
+            suggested_grade = distributions[0]["avgGrade"]
+        else:
+            suggested_grade = required_grade
+
+        # ส่งผลลัพธ์กลับ
+        result = (
+            f"คุณต้องทำเกรดเฉลี่ยอย่างน้อย {suggested_grade:.2f} "
+            f"ในวิชาที่เหลือ ({remaining_credits} หน่วยกิต) เพื่อให้ได้ GPA {target_gpa:.2f} หรือมากกว่า"
+        )
         return JsonResponse({"result": result, "distributions": distributions})
 
     return render(request, "app_plan/home.html")
